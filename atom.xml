@@ -3,11 +3,11 @@
   <title>MyBlog</title>
   
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="/blog/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://albuswhite.github.io/blog/"/>
   <updated>2019-10-10T09:59:00.151Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://albuswhite.github.io/blog/</id>
   
   <author>
     <name>White Chen</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Verbal1</title>
-    <link href="http://yoursite.com/2019/10/10/verbal1/"/>
-    <id>http://yoursite.com/2019/10/10/verbal1/</id>
+    <link href="http://albuswhite.github.io/blog/2019/10/10/verbal1/"/>
+    <id>http://albuswhite.github.io/blog/2019/10/10/verbal1/</id>
     <published>2019-10-10T09:59:00.151Z</published>
     <updated>2019-10-10T09:59:00.151Z</updated>
     
@@ -32,17 +32,17 @@
     </summary>
     
     
-      <category term="GRE" scheme="http://yoursite.com/categories/GRE/"/>
+      <category term="GRE" scheme="http://albuswhite.github.io/blog/categories/GRE/"/>
     
     
-      <category term="GRE" scheme="http://yoursite.com/tags/GRE/"/>
+      <category term="GRE" scheme="http://albuswhite.github.io/blog/tags/GRE/"/>
     
   </entry>
   
   <entry>
     <title>Words</title>
-    <link href="http://yoursite.com/2019/10/10/Words/"/>
-    <id>http://yoursite.com/2019/10/10/Words/</id>
+    <link href="http://albuswhite.github.io/blog/2019/10/10/Words/"/>
+    <id>http://albuswhite.github.io/blog/2019/10/10/Words/</id>
     <published>2019-10-10T09:58:55.269Z</published>
     <updated>2019-10-10T09:58:55.269Z</updated>
     
@@ -65,17 +65,17 @@
     </summary>
     
     
-      <category term="GRE" scheme="http://yoursite.com/categories/GRE/"/>
+      <category term="GRE" scheme="http://albuswhite.github.io/blog/categories/GRE/"/>
     
     
-      <category term="GRE" scheme="http://yoursite.com/tags/GRE/"/>
+      <category term="GRE" scheme="http://albuswhite.github.io/blog/tags/GRE/"/>
     
   </entry>
   
   <entry>
     <title>Verbal2</title>
-    <link href="http://yoursite.com/2019/10/10/Verbal2/"/>
-    <id>http://yoursite.com/2019/10/10/Verbal2/</id>
+    <link href="http://albuswhite.github.io/blog/2019/10/10/Verbal2/"/>
+    <id>http://albuswhite.github.io/blog/2019/10/10/Verbal2/</id>
     <published>2019-10-10T09:57:32.464Z</published>
     <updated>2019-10-10T09:57:32.464Z</updated>
     
@@ -89,10 +89,10 @@
     </summary>
     
     
-      <category term="GRE" scheme="http://yoursite.com/categories/GRE/"/>
+      <category term="GRE" scheme="http://albuswhite.github.io/blog/categories/GRE/"/>
     
     
-      <category term="GRE" scheme="http://yoursite.com/tags/GRE/"/>
+      <category term="GRE" scheme="http://albuswhite.github.io/blog/tags/GRE/"/>
     
   </entry>
   
