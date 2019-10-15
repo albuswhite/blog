@@ -226,6 +226,149 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://albuswhite.github.io/blog/blog/2019/10/15/Java Socket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="White Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://blog.albuswhite.com.cn/474FBEB64A4897E20B555A30A8F6E13F.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/2019/10/15/Java Socket/" class="post-title-link" itemprop="url">Java Socket</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-15 19:09:56" itemprop="dateCreated datePublished" datetime="2019-10-15T19:09:56+08:00">2019-10-15</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>端口,IP之类这里就不讲了.小学期大家都做过.<br>接下来说的都会按照课件最后一个多线程demo来讲</p>
+<h3 id="Socket的通信地址"><a href="#Socket的通信地址" class="headerlink" title="Socket的通信地址"></a>Socket的通信地址</h3><p>InetAddress是java封装好的函数,主要可以用作获取ip,用户名等.<br>e.g:<br><code>InetAddress address = InetAddress.getLocalHost();
+System.out.println( address.getHostName());          //本机用户名
+System.out.println( address.getHostAddress());       //本机ip</code></p>
+<p>这里用了null, 那就会获取默认的 localhost/127.0.0.1<br><code>InetAddress addr = InetAddress.getByName(null)</code></p>
+<h3 id="Socket通信过程"><a href="#Socket通信过程" class="headerlink" title="Socket通信过程"></a>Socket通信过程</h3><p><img src="http://blog.albuswhite.com.cn/socket%E9%80%9A%E4%BF%A1%E6%A8%A1%E5%9E%8B.png" alt="Socket通信模型"></p>
+<ol>
+<li>创建ServerSocket和Socket</li>
+<li>打开连接到Socket的输入/输出流</li>
+<li>按照协议对Socket进行读/写操作</li>
+<li>关闭输入输出流,关闭Socket</li>
+</ol>
+<h4 id="Sever端"><a href="#Sever端" class="headerlink" title="Sever端"></a>Sever端</h4><ol>
+<li>创建ServerSocket对象,绑定监听端口</li>
+</ol>
+<p><code>ServerSocket s = new ServerSocket(PORT);</code></p>
+<ol start="2">
+<li>通过accept( )方法监听客户端请求</li>
+</ol>
+<p><code>Socket socket = s.accept();</code></p>
+<ol start="3">
+<li>连接建立后,通过输入流读取客户端发送的请求信息</li>
+</ol>
+<p><code>in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+  String str = in.readLine();</code><br>  注: BufferReader是缓冲读取</p>
+<ol start="4">
+<li>通过输出流向客户端发送相映信息</li>
+</ol>
+<p><code>out = new PrintWriter(new BufferedWriter
+(new OutputStreamWriter(socket.getOutputStream())), true);
+ out.println(str);     // 在输出流中写入数据</code></p>
+<ol start="5">
+<li>关闭相关资源</li>
+</ol>
+<p><code>socket.close();</code></p>
+<h4 id="Client端"><a href="#Client端" class="headerlink" title="Client端"></a>Client端</h4><ol>
+<li><p>创建Socket对象,指明需要连接的服务器的地址和端口</p>
+<p>  <code>socket = new Socket(addr, PORT);</code></p>
+</li>
+<li><p>连接建立后,通过输出流向服务器端发送请求信息</p>
+<p><code>out = new PrintWriter(new BufferedWriter
+(new OutputStreamWriter(socket.getOutputStream())), true);</code><br>注: 这个true是自动清空缓冲区的意思 </p>
+<p><code>out.println(&quot;Client &quot; + id + &quot;: &quot; + i);</code></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>通过输入流获取服务器响应的信息</p>
+<p><code>in = new BufferedReader(new InputStreamReader(socket.getInputStream())) ;
+String str = in.readLine();     //读取响应信息</code></p>
+</li>
+<li><p>关闭相关资源</p>
+</li>
+</ol>
+<p><code>socket.close();</code></p>
+<h4 id="多线程实现多客户端"><a href="#多线程实现多客户端" class="headerlink" title="多线程实现多客户端"></a>多线程实现多客户端</h4><ol>
+<li>服务器创建ServerSocket, 循环调用accept( )等待客户端连接</li>
+<li>客户端创建一个socket并请求和服务器端连接</li>
+<li>服务器端接受客户端请求,创建socket与该客户建立专线联系</li>
+<li>建立连接的两个socket在一个单独的线程上对话</li>
+<li>服务器端继续等待新的连接</li>
+</ol>
+<p>具体代码解释我就不写了,本质就是客户端多线程.<br>demo代码利用了Client的多线程模拟多个客户连接服务端, 服务端用多线程实现了多个连接</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://albuswhite.github.io/blog/blog/2019/10/10/verbal1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,7 +694,7 @@
         
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -564,7 +707,7 @@
             <a href="/blog/categories/">
           
         
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">categories</span>
         </a>
       </div>
@@ -577,7 +720,7 @@
             <a href="/blog/tags/">
           
         
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
