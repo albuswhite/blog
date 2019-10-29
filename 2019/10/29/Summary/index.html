@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/blog/atom.xml /注意：有一个空格" title="MyBlog" type="application/atom+xml">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/blog/lib/pace/pace-theme-bounce.min.css?v=1.0.2">
+  <script src="/blog/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Week 1-2Threadprocess and thread线程是进程中的⼀个实体，是被系统独⽴调度和分派的基本单位，线程⾃⼰不拥有系统资源，只拥有⼀点在运⾏中必不可少的资源，但它可与同属⼀个进程的其它线程共享进程所拥有的全部资 源。⼀个线程可以创建和撤消另⼀个线程，同⼀进程中的多个线程之间可以并发执⾏。线程有就 绪、阻塞和运⾏三种基本状态。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Summary">
+<meta property="og:url" content="http://albuswhite.github.io/blog/2019/10/29/Summary/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="Week 1-2Threadprocess and thread线程是进程中的⼀个实体，是被系统独⽴调度和分派的基本单位，线程⾃⼰不拥有系统资源，只拥有⼀点在运⾏中必不可少的资源，但它可与同属⼀个进程的其它线程共享进程所拥有的全部资 源。⼀个线程可以创建和撤消另⼀个线程，同⼀进程中的多个线程之间可以并发执⾏。线程有就 绪、阻塞和运⾏三种基本状态。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://blog.albuswhite.com.cn/html%E4%BB%A3%E7%A0%81.png">
+<meta property="og:image" content="http://blog.albuswhite.com.cn/form%E6%95%88%E6%9E%9C.png">
+<meta property="og:updated_time" content="2019-10-29T15:41:01.153Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Summary">
+<meta name="twitter:description" content="Week 1-2Threadprocess and thread线程是进程中的⼀个实体，是被系统独⽴调度和分派的基本单位，线程⾃⼰不拥有系统资源，只拥有⼀点在运⾏中必不可少的资源，但它可与同属⼀个进程的其它线程共享进程所拥有的全部资 源。⼀个线程可以创建和撤消另⼀个线程，同⼀进程中的多个线程之间可以并发执⾏。线程有就 绪、阻塞和运⾏三种基本状态。">
+<meta name="twitter:image" content="http://blog.albuswhite.com.cn/html%E4%BB%A3%E7%A0%81.png">
+  <link rel="canonical" href="http://albuswhite.github.io/blog/2019/10/29/Summary/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Java Summary | MyBlog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <div class="container use-motion">
+    <div class="headband"></div>
+<a href="https://github.com/albuswhite" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MyBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/blog/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/blog/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+  </ul>
+
+    
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://albuswhite.github.io/blog/blog/2019/10/29/Summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="White Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://blog.albuswhite.com.cn/474FBEB64A4897E20B555A30A8F6E13F.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Java Summary
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-29 23:41:01" itemprop="dateCreated datePublished" datetime="2019-10-29T23:41:01+08:00">2019-10-29</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Week-1-2"><a href="#Week-1-2" class="headerlink" title="Week 1-2"></a>Week 1-2</h1><h2 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h2><h3 id="process-and-thread"><a href="#process-and-thread" class="headerlink" title="process and thread"></a>process and thread</h3><p>线程是进程中的⼀个实体，是被系统独⽴调度和分派的基本单位，线程⾃⼰不拥有系统资源，只拥有⼀点在运⾏中必不可少的资源，但它可与同属⼀个进程的其它线程共享进程所拥有的全部资 源。⼀个线程可以创建和撤消另⼀个线程，同⼀进程中的多个线程之间可以并发执⾏。线程有就 绪、阻塞和运⾏三种基本状态。</p>
+<a id="more"></a>
+<h4 id="Describe-the-TWO-main-differences-between-a-process-and-a-thread"><a href="#Describe-the-TWO-main-differences-between-a-process-and-a-thread" class="headerlink" title="Describe the TWO main differences between a process and a thread."></a>Describe the TWO main differences between a process and a thread.</h4><p>Difference 1<br>A process is isolated, has its own independent memory and it is associated with a single application; e.g. think of Window’s task manager.<br>All threads exist within one process and share the same memory</p>
+<p>Difference 2<br>A thread can be thought of as a ‘light weight’ process; it is ususally used for small tasks.<br>Processes are used for more ‘heavy weight’ tasks; usually, to execute applications.</p>
+<h3 id="States-and-Method"><a href="#States-and-Method" class="headerlink" title="States and Method"></a>States and Method</h3><p>ready-to-run, sleeping, waiting, running, blocked</p>
+<p>run, yield, sleep, wait, notify, and notifyAll</p>
+<h4 id="Relationship"><a href="#Relationship" class="headerlink" title="Relationship"></a>Relationship</h4><p>When a thread is constructed and the <strong>start( )</strong> method called, it is ready-to-run(but may not be running because it is waiting for a place on the CPU).</p>
+<p>A thread is put to sleep by the <strong>sleep</strong> command, and afer the amout of time specified in the parameter it returns to ready-to-run state.</p>
+<p>The <strong>yield</strong> command takes the thread in the running state and moves it to the ready-to-run state.</p>
+<p>A thread can be moved to the waiting state by the <strong>wait</strong> command, and it returns to a ready-to-run state by the <strong>notify</strong> and <strong>notifyAll</strong> commands.</p>
+<p>The <strong>run</strong> command operates on a thread in the ready-to-run state, and when it is finished the thread moves to the dead state.</p>
+<h3 id="two-possible-ways-to-create-a-thread"><a href="#two-possible-ways-to-create-a-thread" class="headerlink" title="two possible ways to create a thread"></a>two possible ways to create a thread</h3><p>Method 1: Extend the Thread class<br>Method 2: Implement the Runnable interface<br>Generally developers recommend the implementing the Runnable interface, rather than the extending the Thread class.<br>This is because you can implement many interfaces, but you can only extend one class in Java.</p>
+<h4 id="benefit-of-implementing-a-thread-using-the-Runnable-interface-rather-than-extending-the-Thread-class"><a href="#benefit-of-implementing-a-thread-using-the-Runnable-interface-rather-than-extending-the-Thread-class" class="headerlink" title="benefit of implementing a thread using the Runnable interface, rather than extending the Thread class?"></a>benefit of implementing a thread using the Runnable interface, rather than extending the Thread class?</h4><p>If you implement Runnable, the class will be able to extend another class.<br>If you extend Thread, you will not be able to extend any other class because Java only allows a class to extend one other class.</p>
+<h3 id="Interrupt"><a href="#Interrupt" class="headerlink" title="Interrupt"></a>Interrupt</h3><h4 id="中断-interrupt"><a href="#中断-interrupt" class="headerlink" title="中断(interrupt)"></a>中断(interrupt)</h4><p>t.interrupt()不会中断正在执行的线程，只是将线程的标志位设置成true。但是如果线程在调用sleep(),join(),wait()方法时线程被中断，则这些方法会抛出InterruptedException，在catch块中捕获到这个异常时，线程的中断标志位已经被设置成false了，因此在此catch块中调用t.isInterrupted(),Thread.interrupted()始终都为false,<br>而t.isInterrupted与Thread.interrupted()的区别是:<br>Thread.interrupted()<br>检查是否发生中断.Thread.interrupted()能告诉你线程是否发生中断,并将清除中断状态标记，所以程序不会两次通知你线程发生了中断．<br>t.isInterrupted<br>测试线程是否已经中断。线程的中断状态不受该方法的影响。 </p>
+<h4 id="What-is-interrupt-signal-How-is-an-interrupt-signal-represented-internally-in-the-Thread-class"><a href="#What-is-interrupt-signal-How-is-an-interrupt-signal-represented-internally-in-the-Thread-class" class="headerlink" title="What is interrupt signal? How is an interrupt signal represented internally in the Thread  class?"></a>What is interrupt signal? How is an interrupt signal represented internally in the Thread  class?</h4><p>An interrupt signal is a signal to a thread. to stop doing what it is doing.<br>It is represented as a <strong>Boolean</strong> variable.</p>
+<h4 id="Four-ways-in-which-a-thread-can-be-terminated"><a href="#Four-ways-in-which-a-thread-can-be-terminated" class="headerlink" title="Four ways in which a thread can be terminated"></a>Four ways in which a thread can be terminated</h4><ol>
+<li>In the catch statement, the interrupted( ) method could be called again to set the interrupt signal back to true. The thread would then naturally terminate.</li>
+<li>The code could be changed so that the Interrupted Exception is caught by the GeneralInterrupt thread and this triggers an immediate return, terminating the thread.</li>
+<li>The thread could be set to a daemon thread. It wil be automatically terminated by Java when the main thread completes.</li>
+<li>Another Boolean variable could be used that be changed by other threads.</li>
+</ol>
+<h3 id="keyword"><a href="#keyword" class="headerlink" title="keyword"></a>keyword</h3><h4 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h4><p>Volatile is used to indicate that a variable’s value will be modified by different thread.<br>只有primitive variable 可以被声明为volatile,不适合复杂操作(意思是类,数组,借口这种变量不可被声明 )<br>e.g. public volatile int counter=0; 用法像final</p>
+<h4 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h4><p>Synchronized means that <strong>getNextValue( )</strong> can only be access by one thread at a time (surrounds the method with a lock)<br>e.g. public synchronzied int getNextValue( ){ }<br>如果一个程序里有2个method 有 synchronized 关键词, 那么在同一时间只有1个被executed</p>
+<h4 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h4><h5 id="Intrinsic-lock"><a href="#Intrinsic-lock" class="headerlink" title="Intrinsic lock"></a>Intrinsic lock</h5><p>when a thread has a lock, no other thread can acquire it.(It must wait for the first thread to release the lock)</p>
+<h5 id="monitor-lock"><a href="#monitor-lock" class="headerlink" title="monitor lock"></a>monitor lock</h5><p>mutual exclusion(synchronized): only allows one thread to execute a part of code at a given time.<br>cooperation(wait( ) and notify( )): enable threads to work together.</p>
+<h5 id="Deadlock"><a href="#Deadlock" class="headerlink" title="Deadlock"></a>Deadlock</h5><p>two or more threads waiting for two or more loclks to be freed, and the circumstances in the program is such that the locks will never be freed.</p>
+<h4 id="Multithreading"><a href="#Multithreading" class="headerlink" title="Multithreading"></a>Multithreading</h4><p>The most common multithreading issues are Race Conditions and Deadlocks.</p>
+<h5 id="race-condition"><a href="#race-condition" class="headerlink" title="race condition"></a>race condition</h5><p>A race condition occurs when two or more threads can access shared data and they try to change it at the same time, but you don’t know the order in which the threads will attempt to access the shared data.</p>
+<h5 id="Briefly-describe-the-main-difficulties-faced-by-software-developers-when-producing-multithreaded-code"><a href="#Briefly-describe-the-main-difficulties-faced-by-software-developers-when-producing-multithreaded-code" class="headerlink" title="Briefly describe the main difficulties faced by software developers, when producing multithreaded code."></a>Briefly describe the main difficulties faced by software developers, when producing multithreaded code.</h5><p>With TCP, there is absolute guarantee that the data transferred remains intact and arrives in the same order in which it was sent<br>With UDP, there is no guarantee that the messages or packets sent would reach at all.</p>
+<h4 id="critical-piece"><a href="#critical-piece" class="headerlink" title="critical piece"></a>critical piece</h4><p>A critical piece of code is one where two threads execute the code at the same time but the code is not thread-safe which can cause e.g, data to become unsynchronized.</p>
+<h5 id="Indicate-the-Java-keyword-that-is-used-to-protect-a-critical-piece-of-code"><a href="#Indicate-the-Java-keyword-that-is-used-to-protect-a-critical-piece-of-code" class="headerlink" title="Indicate the Java keyword that is used to protect a critical piece of code."></a>Indicate the Java keyword that is used to protect a critical piece of code.</h5><p>The synchronized keyword is used to protect a critical piece of code.</p>
+<h5 id="If-two-threads-attempt-to-access-a-critical-piece-of-code-one-of-the-threads-will-be-successful-and-execute-the-code-In-this-scenario-indicate-what-will-happen-to-the-second-thread"><a href="#If-two-threads-attempt-to-access-a-critical-piece-of-code-one-of-the-threads-will-be-successful-and-execute-the-code-In-this-scenario-indicate-what-will-happen-to-the-second-thread" class="headerlink" title="If two threads attempt to access a critical piece of code, one of the threads will be successful and execute the code. In this scenario, indicate what will happen to the second thread."></a>If two threads attempt to access a critical piece of code, one of the threads will be successful and execute the code. In this scenario, indicate what will happen to the second thread.</h5><p>In this scenario, the second thread will go into a blocked state.</p>
+<h3 id="TCP-UDP"><a href="#TCP-UDP" class="headerlink" title="TCP/UDP"></a>TCP/UDP</h3><h4 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h4><h5 id="A-port-number-is-provided-when-setting-up-a-socket-connection-Valid-port-numbers-are-in-the-range-0–65536-but-you-should-not-use-ports-in-the-range-0–1024-Explain-why-that-is-the-case"><a href="#A-port-number-is-provided-when-setting-up-a-socket-connection-Valid-port-numbers-are-in-the-range-0–65536-but-you-should-not-use-ports-in-the-range-0–1024-Explain-why-that-is-the-case" class="headerlink" title="A port number is provided when setting up a socket connection. Valid port numbers are in the range 0–65536, but you should not use ports in the range 0–1024. Explain why that is the case."></a>A port number is provided when setting up a socket connection. Valid port numbers are in the range 0–65536, but you should not use ports in the range 0–1024. Explain why that is the case.</h5><p>Ports in the range 0-1024 are reserved ports and so should only be used for these established services</p>
+<p>e.g.</p>
+<ul>
+    <li> Web servers(HTTP) on port 80 </li>
+    <li> Encrypted web servers(HTTPS) on port 443 </li>
+    <li> Secure SHell(SSH) on port 22 </li>
+    <li> File Transfer Protocol(SMTP) on ports 20 and 21 </li>
+    <li> Simple Mail Transfer Protocol(SMTP) on port 25</li>
+    </ul>
+
+<h5 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h5><ol>
+<li><p>HTTPS is secure </p>
+</li>
+<li><p>HTTPS is the same as HTTP but runs over TLS </p>
+</li>
+<li><p>HTTPS uses port  443</p>
+</li>
+<li><p>All headers are encrypted</p>
+</li>
+<li><p>All payloads are encrypted</p>
+</li>
+</ol>
+<h4 id="RMI"><a href="#RMI" class="headerlink" title="RMI"></a>RMI</h4><p>这个去年有考,但现在ppt上没有,先不写了.</p>
+<h4 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h4><ol>
+<li>The server instantiates a ServerSocket object, denoting which port number communication is to occur on.</li>
+<li>The server invokes the accept() method of the ServerSocket class.</li>
+<li>This method waits until a client connects to the server.</li>
+<li>While the server is waiting, a client instantiates a Socket object, specifying the server name and the port number to connect to.</li>
+<li>The constructor of the Socket class attempts to connect the client to the specified server and the port number. If communication is established, the client now has a Socket object capable of communicating with the server.</li>
+<li>On the server side, the accept() method returns a reference to a new socket on the client that is connected to the client socket.</li>
+</ol>
+<h5 id="When-you-open-a-stream-you-should-always-close-it-when-you-have-finished-Briefly-explain-this-statement"><a href="#When-you-open-a-stream-you-should-always-close-it-when-you-have-finished-Briefly-explain-this-statement" class="headerlink" title="When you open a stream, you should always close it when you have finished. Briefly explain this statement."></a>When you open a stream, you should always close it when you have finished. Briefly explain this statement.</h5><p>In general, a stream is an expensive resource on a computer. This could be a stream over the internet, which is expensive to maintain, and these resources are limited and may prevent more connections</p>
+<h5 id="Indicate-how-you-can-ensure-that-a-stream-is-always-closed-after-use-even-when-an-error-has-occurred"><a href="#Indicate-how-you-can-ensure-that-a-stream-is-always-closed-after-use-even-when-an-error-has-occurred" class="headerlink" title="Indicate how you can ensure that a stream is always closed after use, even when an error has occurred."></a>Indicate how you can ensure that a stream is always closed after use, even when an error has occurred.</h5><p>If an error occurs, you should surround it with a try-catch block, but you can also add any code you need in the event of an error and put it in a finally block.</p>
+<h5 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h5><p>The <strong>ping</strong>  command sends 4 packets of data, in 32 types; it tells us:</p>
+<ol>
+<li>The IP address of the server that we are sending the ping command to.</li>
+<li>The round trip time of each packet.</li>
+<li>Other statistics, e.g. minimum and maximum times are average times.</li>
+</ol>
+<h2 id="Front-end"><a href="#Front-end" class="headerlink" title="Front end"></a>Front end</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><h4 id="常用标签"><a href="#常用标签" class="headerlink" title="常用标签"></a>常用标签</h4><p><img src="http://blog.albuswhite.com.cn/html%E4%BB%A3%E7%A0%81.png" alt="html常用代码"><br>列表 : 有序列表 <code>&lt;ol&gt; -- &lt;li&gt;</code><br>           无序列表 <code>&lt;ul&gt; -- &lt;li&gt;</code><br>表格: <code>&lt;table&gt;</code><br>标题  <code>&lt;th&gt;</code>       会出现加粗效果<br>行      <code>&lt;tr&gt;</code><br>列      <code>&lt;td&gt;</code></p>
+<h4 id="Form"><a href="#Form" class="headerlink" title="Form"></a>Form</h4><p>这里把form单独拿出来讲下,因为这个东西没用且垃圾.但是喜欢考,历史的车轮滚滚向后.</p>
+<p>`<form onsubmit="return onSubmitFullName()" name="bankForm" method="post" action="./createAccount.html"><br>    First name: <input type="text" name="firstname"><br><br>    Last name : <input type="text" name="lastname"><br><br><br>    Preferred Username: <input type="text" name="user"><br><br>    Preferred Password: <input type="password" name="password"><br> <br><br>    Type of account to open:</form></p>
+<select name="accountType">
+    <option value="current" selected="selected">Current</option> 
+    <option value="savings">Savings</option> 
+    </select>
+    <br><br> 
+    <input type="submit" value="Submit"> 
+`
+
+<p>这是上面那段代码的效果, 按下submit按钮,会使用post方法向createAccount.html发送函数onSubmitFullName()的结果<br><img src="http://blog.albuswhite.com.cn/form%E6%95%88%E6%9E%9C.png" alt="form效果"></p>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><ol>
+<li>The alert( ) function can be used to display text to the user in a web page.</li>
+<li>A function is a reusable piece of JavaScript code that performs a common task.</li>
+<li>var  is the JavaScript keyword used to create a variable.</li>
+<li>In JavaScript, 3.14, 11 and 120 are examples of values of the number data type.</li>
+<li>The JavaScript data type text is used to store characters and strings.</li>
+<li>In JavaScript, we can use the parseInt( ) function to convert a string to an integer value.</li>
+<li>An event handler is a command that JavaScript uses to deal with actions performed by the user while visiting a webpage; onChange and onClick are both examples of this.   </li>
+</ol>
+<h4 id="跳转页面"><a href="#跳转页面" class="headerlink" title="跳转页面"></a>跳转页面</h4><p>window.location.href = “votingSuccessful.html”;</p>
+<h4 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h4><p>dom太复杂了,我也不知道从哪里讲起,暂时先列一下出现过的dom操作吧</p>
+<ol>
+<li><p><code>document.forms[&quot;filmVoting&quot;].fav_film.value;</code><br>这指的是叫做“filmVoting”的form其中name=“fav_film”那个标签的值.</p>
+</li>
+<li><p><code>document.bankForm.firstName.value</code><br>这个和上一个差不多,不过这个直接用了bankForm指向那个name=”bankForm”的form</p>
+</li>
+<li><p><code>document.write</code><br> 这个句子更傻逼了,就是在页面的最后加内容.</p>
+</li>
+</ol>
+<h4 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h4><h5 id="使用-JavaScript-创建Cookie"><a href="#使用-JavaScript-创建Cookie" class="headerlink" title="使用 JavaScript 创建Cookie"></a>使用 JavaScript 创建Cookie</h5><p>document.cookie=”username=John Doe; expires= Thu, 18 Dec 2013 12:00:00 GMT; path=/“;</p>
+<p>后面是过期时间和路径,暂时没看到有考</p>
+<h5 id="使用-JavaScript-读取-Cookie"><a href="#使用-JavaScript-读取-Cookie" class="headerlink" title="使用 JavaScript 读取 Cookie"></a>使用 JavaScript 读取 Cookie</h5><p>var x=document.cookie;</p>
+<h5 id="使用-JavaScript-修改-Cookie"><a href="#使用-JavaScript-修改-Cookie" class="headerlink" title="使用 JavaScript 修改 Cookie"></a>使用 JavaScript 修改 Cookie</h5><p>document.cookie=”username=John Doe; expires= Thu, 18 Dec 2013 12:00:00 GMT; path=/“;</p>
+<p>其实就是覆盖</p>
+<h5 id="使用-JavaScript-删除-Cookie"><a href="#使用-JavaScript-删除-Cookie" class="headerlink" title="使用 JavaScript 删除 Cookie"></a>使用 JavaScript 删除 Cookie</h5><p>document.cookie = “username=; expires=Thu, 01 Jan 1970 00:00:00 GMT”;</p>
+<p>本质是把过期时间设置为过去.</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/blog/tags/Java/" rel="tag"># Java</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/2019/10/15/Java Socket/" rel="next" title="Java Socket">
+                  <i class="fa fa-chevron-left"></i> Java Socket
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Week-1-2"><span class="nav-number">1.</span> <span class="nav-text">Week 1-2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread"><span class="nav-number">1.1.</span> <span class="nav-text">Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#process-and-thread"><span class="nav-number">1.1.1.</span> <span class="nav-text">process and thread</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Describe-the-TWO-main-differences-between-a-process-and-a-thread"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Describe the TWO main differences between a process and a thread.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#States-and-Method"><span class="nav-number">1.1.2.</span> <span class="nav-text">States and Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Relationship"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Relationship</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#two-possible-ways-to-create-a-thread"><span class="nav-number">1.1.3.</span> <span class="nav-text">two possible ways to create a thread</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#benefit-of-implementing-a-thread-using-the-Runnable-interface-rather-than-extending-the-Thread-class"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">benefit of implementing a thread using the Runnable interface, rather than extending the Thread class?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt"><span class="nav-number">1.1.4.</span> <span class="nav-text">Interrupt</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#中断-interrupt"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">中断(interrupt)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#What-is-interrupt-signal-How-is-an-interrupt-signal-represented-internally-in-the-Thread-class"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">What is interrupt signal? How is an interrupt signal represented internally in the Thread  class?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Four-ways-in-which-a-thread-can-be-terminated"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">Four ways in which a thread can be terminated</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keyword"><span class="nav-number">1.1.5.</span> <span class="nav-text">keyword</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Volatile"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">Volatile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lock"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Intrinsic-lock"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">Intrinsic lock</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#monitor-lock"><span class="nav-number">1.1.5.3.2.</span> <span class="nav-text">monitor lock</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Deadlock"><span class="nav-number">1.1.5.3.3.</span> <span class="nav-text">Deadlock</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multithreading"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">Multithreading</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#race-condition"><span class="nav-number">1.1.5.4.1.</span> <span class="nav-text">race condition</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Briefly-describe-the-main-difficulties-faced-by-software-developers-when-producing-multithreaded-code"><span class="nav-number">1.1.5.4.2.</span> <span class="nav-text">Briefly describe the main difficulties faced by software developers, when producing multithreaded code.</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#critical-piece"><span class="nav-number">1.1.5.5.</span> <span class="nav-text">critical piece</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Indicate-the-Java-keyword-that-is-used-to-protect-a-critical-piece-of-code"><span class="nav-number">1.1.5.5.1.</span> <span class="nav-text">Indicate the Java keyword that is used to protect a critical piece of code.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#If-two-threads-attempt-to-access-a-critical-piece-of-code-one-of-the-threads-will-be-successful-and-execute-the-code-In-this-scenario-indicate-what-will-happen-to-the-second-thread"><span class="nav-number">1.1.5.5.2.</span> <span class="nav-text">If two threads attempt to access a critical piece of code, one of the threads will be successful and execute the code. In this scenario, indicate what will happen to the second thread.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-UDP"><span class="nav-number">1.1.6.</span> <span class="nav-text">TCP/UDP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-port-number-is-provided-when-setting-up-a-socket-connection-Valid-port-numbers-are-in-the-range-0–65536-but-you-should-not-use-ports-in-the-range-0–1024-Explain-why-that-is-the-case"><span class="nav-number">1.1.6.1.1.</span> <span class="nav-text">A port number is provided when setting up a socket connection. Valid port numbers are in the range 0–65536, but you should not use ports in the range 0–1024. Explain why that is the case.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.1.6.1.2.</span> <span class="nav-text">HTTPS</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMI"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">RMI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Socket"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">Socket</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#When-you-open-a-stream-you-should-always-close-it-when-you-have-finished-Briefly-explain-this-statement"><span class="nav-number">1.1.6.3.1.</span> <span class="nav-text">When you open a stream, you should always close it when you have finished. Briefly explain this statement.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Indicate-how-you-can-ensure-that-a-stream-is-always-closed-after-use-even-when-an-error-has-occurred"><span class="nav-number">1.1.6.3.2.</span> <span class="nav-text">Indicate how you can ensure that a stream is always closed after use, even when an error has occurred.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ping"><span class="nav-number">1.1.6.3.3.</span> <span class="nav-text">ping</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Front-end"><span class="nav-number">1.2.</span> <span class="nav-text">Front end</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">1.2.1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用标签"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">常用标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Form"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Form</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript"><span class="nav-number">1.2.2.</span> <span class="nav-text">JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转页面"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">跳转页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-JavaScript-创建Cookie"><span class="nav-number">1.2.2.3.1.</span> <span class="nav-text">使用 JavaScript 创建Cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-JavaScript-读取-Cookie"><span class="nav-number">1.2.2.3.2.</span> <span class="nav-text">使用 JavaScript 读取 Cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-JavaScript-修改-Cookie"><span class="nav-number">1.2.2.3.3.</span> <span class="nav-text">使用 JavaScript 修改 Cookie</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用-JavaScript-删除-Cookie"><span class="nav-number">1.2.2.3.4.</span> <span class="nav-text">使用 JavaScript 删除 Cookie</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="http://blog.albuswhite.com.cn/474FBEB64A4897E20B555A30A8F6E13F.JPG"
+      alt="White Chen">
+  <p class="site-author-name" itemprop="name">White Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/blog/tags/">
+          
+        
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/blog/atom.xml /注意：有一个空格" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/albuswhite" title="GitHub &rarr; https://github.com/albuswhite" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="/blog/1250473565@qq.com" title="E-Mail &rarr; 1250473565@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1321460473&auto=0&height=66"></iframe>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">White Chen</span>
+</div>
+<!--
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.4.0</div>
+-->
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/blog/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/blog/js/utils.js?v=7.4.0"></script><script src="/blog/js/motion.js?v=7.4.0"></script>
+<script src="/blog/js/schemes/muse.js?v=7.4.0"></script>
+
+<script src="/blog/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
